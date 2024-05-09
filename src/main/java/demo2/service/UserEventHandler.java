@@ -1,22 +1,30 @@
 package demo2.service;
 
 import java.util.HashMap;
-
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import demo2.db.main.persistence.domain.UserDAO;
+import demo2.db.main.persistence.repository.UserRepository;
 
 public class UserEventHandler implements UserService {
 	
 	HashMap<String, String> userInfo = new HashMap<String, String>();
 	
-    public void createUser() {
-    	userInfo.put("anna@gmail.com", "12345678");
-    	userInfo.put("Peter@gmail.com", "12345678");
-    	userInfo.put("John@gmail.com", "12345678");
-    	userInfo.put("May@gmail.com", "12345678");
-    	userInfo.put("Leo@gmail.com", "12345678");
-    	userInfo.put("Mary@mail.com", "12345678");
+	UserDAO user = new UserDAO();
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+    public void createUser(String Name, String Email, String Password) {
+    	System.out.println("tesitng user");
+    	UserDAO user = new UserDAO();
+    	user.setName(Name);
+    	user.setEmail(Email);
+    	user.setPassword(Password);
+    	try {
+    	userRepository.save(user);
+    	}catch (Exception e) {
+    		System.out.println("tesitng save error" + e);
+    	}
     }
 
 	@Override
@@ -27,5 +35,7 @@ public class UserEventHandler implements UserService {
 
 		return "Incorrect Username or password";
 	}
+
+	
 
 }

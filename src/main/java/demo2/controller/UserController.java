@@ -29,9 +29,9 @@ public class UserController {
 		return userInfo;
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String userGet(HttpServletRequest request) throws Exception {
-		userService.createUser();
+	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
+	public String CreateUser(HttpServletRequest request) throws Exception {
+		userService.createUser("test","test@gmail","123456789");
 		return "createUser success!?";
 	}
 
