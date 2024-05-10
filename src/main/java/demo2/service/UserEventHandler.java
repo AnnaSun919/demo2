@@ -14,14 +14,17 @@ public class UserEventHandler implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Override
     public void createUser(String Name, String Email, String Password) {
-    	System.out.println("tesitng user");
-    	UserDAO user = new UserDAO();
-    	user.setName(Name);
-    	user.setEmail(Email);
-    	user.setPassword(Password);
     	try {
-    	userRepository.save(user);
+
+    		UserDAO user = new UserDAO();
+    		
+    		user.setName(Name);
+    		user.setEmail(Email);
+    		user.setPassword(Password);
+    		
+    		userRepository.save(user);
     	}catch (Exception e) {
     		System.out.println("tesitng save error" + e);
     	}
